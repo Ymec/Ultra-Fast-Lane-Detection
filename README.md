@@ -1,5 +1,5 @@
 # Ultra-Fast-Lane-Detection
-PyTorch implementation of the paper "[Ultra Fast Structure-aware Deep Lane Detection](https://arxiv.org/abs/2004.11757)".
+The implementation of the paper "[Ultra Fast Structure-aware Deep Lane Detection](https://arxiv.org/abs/2004.11757)".
 
 Updates: Our paper has been accepted by ECCV2020.
 
@@ -18,7 +18,7 @@ alt="Demo" width="240" height="180" border="10" /></a>
 # Install
 Please see [INSTALL.md](./INSTALL.md)
 
-# Get started
+# Get Started
 First of all, please modify `data_root` and `log_path` in your `configs/culane.py` or `configs/tusimple.py` config according to your environment. 
 - `data_root` is the path of your CULane dataset or Tusimple dataset. 
 - `log_path` is where tensorboard logs, trained models and code backup are stored. ***It should be placed outside of this project.***
@@ -30,6 +30,8 @@ First of all, please modify `data_root` and `log_path` in your `configs/culane.p
 For single gpu training, run
 ```Shell
 python train.py configs/path_to_your_config
+python train.py configs/tusimple.py
+python train.py configs/culane.py
 ```
 For multi-gpu training, run
 ```Shell
@@ -83,8 +85,11 @@ Same as training, multi-gpu evaluation is also supported.
 We provide a script to visualize the detection results. Run the following commands to visualize on the testing set of CULane and Tusimple.
 ```Shell
 python demo.py configs/culane.py --test_model path_to_culane_18.pth
+python culane_manka.py configs/culane.py --test_model /home/cts/cyh/Ultra-Fast-Lane-Detection-master/ep049.pth
 # or
 python demo.py configs/tusimple.py --test_model path_to_tusimple_18.pth
+python demo.py configs/tusimple.py --test_model /home/cts/cyh/Ultra-Fast-Lane-Detection-master/098.pth
+python tusimple_manka.py configs/tusimple.py --test_model /home/cts/cyh/Ultra-Fast-Lane-Detection-master/tusimple_ep098.pth
 ```
 
 Since the testing set of Tusimple is not ordered, the visualized video might look bad and we **do not recommend** doing this.
@@ -92,11 +97,7 @@ Since the testing set of Tusimple is not ordered, the visualized video might loo
 # Speed
 To test the runtime, please run
 ```Shell
-python speed_simple.py  
-# this will test the speed with a simple protocol and requires no additional dependencies
-
-python speed_real.py
-# this will test the speed with real video or camera input
+python speed.py
 ```
 It will loop 100 times and calculate the average runtime and fps in your environment.
 
@@ -110,6 +111,3 @@ booktitle = {The European Conference on Computer Vision (ECCV)},
 year = {2020}
 }
 ```
-
-# Thanks
-Thanks zchrissirhcz for the contribution to the compile tool of CULane, KopiSoftware for contributing to the speed test, and ustclbh for testing on the Windows platform.
